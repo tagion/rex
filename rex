@@ -20,16 +20,24 @@ echo
 echo "You are in project: $ORIGIN_PATH"
 echo
 
+C=''
+for i in "$@"; do 
+    i="${i//\\/\\\\}"
+    C="$C \"${i//\"/\\\"}\""
+done
+
 for DIR in $(ls src); do
     echo -e "\033[1m$DIR\033[0m"
     
     cd "$ORIGIN_PATH/src/$DIR/";
-    C=''
-    for i in "$@"; do 
-        i="${i//\\/\\\\}"
-        C="$C \"${i//\"/\\\"}\""
-    done
     bash -c "$C"
 
     echo 
 done
+
+echo -e "\033[1mtub\033[0m"
+    
+cd "$ORIGIN_PATH/tub/";
+bash -c "$C"
+
+echo 
