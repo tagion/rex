@@ -26,7 +26,7 @@ for i in "$@"; do
     C="$C \"${i//\"/\\\"}\""
 done
 
-if [ -d "src" ]; then
+if [ -d "$ORIGIN_PATH/src" ]; then
 for DIR in $(ls src); do
     echo -e "\033[1m$DIR\033[0m"
     
@@ -36,16 +36,16 @@ for DIR in $(ls src); do
     echo 
 done
 else
-echo "./src not found, skipped"
+echo "$ORIGIN_PATH/src not found, skipped"
 fi
 
-if [ -d "tub" ]; then
+if [ -d "$ORIGIN_PATH/tub" ]; then
 echo -e "\033[1mtub\033[0m"
     
 cd "$ORIGIN_PATH/tub/";
 bash -c "$C"
 
 else 
-echo "./tub not found, skipped"
+echo "$ORIGIN_PATH/tub not found, skipped"
 fi
 echo
