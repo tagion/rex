@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
 while [[ $(pwd) != / ]] ; do
-    TUBROOT=$(find "$(pwd)"/ -maxdepth 1 -name "tubroot")
+    # Polyfill for old tubroot format
+    TUBROOT_LEGACY=$(find "$(pwd)"/ -maxdepth 1 -name "tubroot")
+    if test -f "$TUBROOT_LEGACY"; then
+        mv tubroot tubroot.mk
+    fi
+
+    TUBROOT=$(find "$(pwd)"/ -maxdepth 1 -name "tubroot.mk")
+
     if [[ -z "$TUBROOT" ]] ; then
     cd ..
     else
